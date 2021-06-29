@@ -50,5 +50,15 @@ class userController {
         })
         .catch(next)
     }
+
+    static rename(req, res, next){
+        const { name } = req.body;
+        User.findOne({_id : req.params._id})
+        .then((townhall)=>{
+            townhall.name = name;
+            return User.updateOn({$set: {name : townhall.name}})
+        })
+        .catch(next);
+    }
 }
 module.exports = userController;
